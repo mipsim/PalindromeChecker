@@ -4,13 +4,20 @@
 public void setup()
 {
   String lines[] = loadStrings("palindromes.txt");
+
   println("there are " + lines.length + " lines");
+
   for (int i=0; i < lines.length; i++) 
   {
-    if(palindrome(lines[i])==true)
+    String temp = new String();
+
+    temp = temp + noCapitals(lines[i]);
+
+    if (palindrome(noSpaces(temp)) == true)
     {
       println(lines[i] + " IS a palidrome.");
     }
+
     else
     {
       println(lines[i] + " is NOT a palidrome.");
@@ -24,7 +31,18 @@ public void setup()
 
 public boolean palindrome(String word)
 {
-  //your code here
+  String sNew = new String();
+
+  for (int i = word.length(); i > 0; i--)
+  {
+    sNew = sNew + word.substring(i-1,i);
+  }
+
+  if (word.equals(sNew))
+  {
+    return true;
+  }
+
   return false;
 }
 
@@ -47,3 +65,49 @@ public String reverse(String str)
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+
+
+public String noSpaces(String sWord)
+{
+  String temp = new String();
+
+  for (int i = 0; i < sWord.length(); i++)
+  {
+    if (Character.isLetter(sWord.charAt(i)) == true)
+    {
+      temp = temp + sWord.charAt(i);
+    }
+  }
+
+  return temp;
+}
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+public int numLetters(String sString)
+{
+  int temp = 0;
+
+  for (int i = 0; i < sString.length(); i++)
+  {
+    if (Character.isLetter(sString.charAt(i)) == true)
+    {
+      temp++;
+    }
+  }
+
+  return temp;
+}
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+public String noCapitals(String sWord)
+{
+  String temp = new String();
+  temp = temp + sWord.toLowerCase();
+  return temp;
+}
